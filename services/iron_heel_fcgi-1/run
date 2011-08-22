@@ -1,4 +1,6 @@
 #!/bin/sh
+HOME=/home/ironheel
+source /home/ironheel/.rvm/scripts/rvm
 dir=$(basename $PWD)
 SVCDIR=$PWD
 extra_port=$(echo $dir|awk -F'-' '{print $(NF)}')
@@ -11,4 +13,4 @@ echo Using port ${whole_port} on ${IP}
 export extra_port
 exec 2>&1
 cd $(<env/APP_ROOT)
-exec chpst -e $SVCDIR/env bash -c "/home/www-data/bin/rackup --host ${IP} -p ${whole_port} -s fastcgi config.ru"
+exec chpst -e $SVCDIR/env bash -c "rackup --host ${IP} -p ${whole_port} -s fastcgi config.ru"
