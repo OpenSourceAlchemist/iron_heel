@@ -1,0 +1,42 @@
+<h1>
+	Search Call Recordings
+</h1>
+
+<%=
+  form(:method => :post, :action => IronHeel::Main.r(:search), :name => 'recordings') do |f|
+    f.legend('Search Call Recordings')
+
+    f.text 'Start (YYYY-MM-DD)', :date_start, Time.now.strftime("%Y-%m-%d")
+    f.text 'Time', :time_start, '00:00', size: 5, maxlength: 5
+
+    f.text 'End (YYYY-MM-DD)', :date_end, Time.now.strftime("%Y-%m-%d")
+    f.text 'Time', :time_end, '23:59', size: 5, maxlength: 5
+
+    f.text 'Agent/Exten', :exten, @exten, size: 4, maxlength: 4
+    f.text 'Phone Number', :number, @number, size: 12, maxlength: 12
+
+    f.select 'Call Direction', :direction, {
+      'BOTH' => 'Both',
+      'OUT'  => 'Out',
+      'IN'   => 'In',
+    }
+
+    f.submit 'Start the search'
+ end
+%>
+
+<script type="text/javascript">
+  $(function() {
+      var dates = $('#recordings-date-start, #recordings-date-end').datepicker({
+      dateFormat: 'yy-mm-dd',
+			changeMonth: true,
+			numberOfMonths: 1,
+			onSelect: function(selectedDate) {
+				var option = this.id == "recordings-date-start" ? "minDate" : "maxDate";
+				var instance = $(this).data("datepicker");
+				var date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+				dates.not(this).datepicker("option", option, date);
+			}
+		});
+	});
+</script>

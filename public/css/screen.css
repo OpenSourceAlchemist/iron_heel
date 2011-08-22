@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: block;
+  font: normal 12px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+p.flash {
+  color: green;
+}
+
+h1 {
+  text-align: center;
+	font: normal 16px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+footer {
+  display: block;
+  text-align: center;
+}

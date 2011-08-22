@@ -1,0 +1,38 @@
+<h1>Listing Recordings</h1>
+
+<table>
+  <tr>
+    <th>Source</th>
+    <th>Destination</th>
+    <th>Direction</th>
+    <th>Timestamp</th>
+    <th>Server</th>
+    <th>Length</th>
+    <th>Listen</th>
+  </tr>
+
+  <% cycle = ['odd', 'even'].cycle %>
+  <% @recordings.each do |recording| %>
+    <tr class="<%= cycle.next %>">
+      <td><%=h recording.src %></td>
+      <td><%=h recording.dst %></td>
+      <td><%=h recording.direction %></td>
+      <td><%=h recording.timestamp %></td>
+      <td><%=h recording.server %></td>
+      <td><%=h recording.length %></td>
+      <td>
+        <%= a('Listen', IronHeel::Main.r(:play_stereo, recording.id)) %>
+        <%= a('Mono',   IronHeel::Main.r(:play_mono, recording.id)) %>
+      </td>
+    </tr>
+  <% end %>
+
+  <tr colspan="2" class="navigation">
+    <td>
+      <%= @recordings.navigation %>
+    </td>
+  </tr>
+</table>
+
+
+<%= a('New Search', IronHeel::Main.r('/')) %>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Iron Heel: <%= h(action.name) %></title>
+    <%= js('jquery-1.4.2.min') %>
+    <%= js('jquery-ui-1.8.2.custom.min') %>
+    <%= css('jquery-ui-1.8.2.custom') %>
+    <%= css('col1') %>
+    <%= css('ui.all') %>
+  </head>
+  <body>
+    <header>
+     <div class="header">
+      <div align="right" class="header"><%= "Welcome #{@user}" %></div>
+      <div align="center">Iron Heel</div>
+      <div align="center">Asterisk Call Center Recording</div>
+     </div>
+    </header>
+    <section>
+      <p class="flash"><%= flash[:notice] %></p>
+      <%= @content %>
+    </section>
+    <footer>
+      <%= h(@user) %>
+    </footer>
+  </body>
+</html>

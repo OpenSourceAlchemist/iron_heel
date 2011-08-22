@@ -1,0 +1,14 @@
+#!/bin/sh
+dir=$(basename $PWD)
+SVCDIR=$PWD
+extra_port=$(echo $dir|awk -F'-' '{print $(NF)}')
+export PATH=~/bin:$PATH
+[ "n$dir" == "n$extra_port" ] && extra_port=0
+[ "n$extra_port" == "n" ] && extra_port=0
+whole_port=$(<env/PORT)${extra_port}
+IP=$(<env/IP)
+echo Using port ${whole_port} on ${IP}
+export extra_port
+exec 2>&1
+cd $(<env/APP_ROOT)
+exec chpst -e $SVCDIR/env bash -c "/home/www-data/bin/rackup --host ${IP} -p ${whole_port} -s fastcgi config.ru"
